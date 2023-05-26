@@ -60,7 +60,9 @@ struct ContentView: View {
                             ForEach(coffeeShops) { coffeeShop in
                                 CoffeeShopCard(
                                     name: coffeeShop.name,
-                                    rating: coffeeShop.rating
+                                    rating: coffeeShop.rating,
+                                    city: coffeeShop.city
+                                    
                                 )
                             }
                         }
@@ -97,9 +99,10 @@ struct CoffeeShopCard: View {
     
     let name : String
     let rating : Float
+    let city : String
     
     var body: some View {
-        NavigationLink(destination: CoffeeShop()){
+        NavigationLink(destination: CoffeeShop(coffeeName: name, coffeeRating: rating, coffeeCity: city, category: "coffee")){
             VStack(alignment: .leading){
                 Image("coffee")
                     .resizable()
@@ -111,7 +114,7 @@ struct CoffeeShopCard: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(Color.black)
-                    .frame(width: 160, alignment: .leading)
+                    .frame(width: .infinity, alignment: .leading)
                 
                 HStack{
                     Image(systemName: "star.fill")

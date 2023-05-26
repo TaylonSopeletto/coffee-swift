@@ -18,6 +18,7 @@ struct CoffeeShopInterface: Codable, Identifiable {
     let id = UUID()
     var name: String
     var rating: Float
+    var city: String
 }
 
 class Api : ObservableObject{

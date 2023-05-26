@@ -9,12 +9,18 @@ import SwiftUI
 
 struct CoffeeShop: View {
     
+    let coffeeName : String
+    let coffeeRating: Float
+    let coffeeCity: String
+    
     @State var coffees = [Coffee]()
+    @State var category: String
     
     func printBullshit() {
         print("print")
     }
     
+
     private func createGridColumns() -> [GridItem] {
         let columns = [
             GridItem()
@@ -38,7 +44,7 @@ struct CoffeeShop: View {
                     
                     VStack(alignment: .leading){
                         VStack(alignment: .leading){
-                            Text("Haus Coffee")
+                            Text(coffeeName)
                                 .font(.title2)
                                 .fontWeight(.semibold)
                             
@@ -47,7 +53,7 @@ struct CoffeeShop: View {
                                     .foregroundColor(Color.yellow)
                                     .frame(width: 10)
                                 
-                                Text("4.5")
+                                Text(String(coffeeRating))
                                     .fontWeight(.semibold)
                                 Text("1200 reviews")
                                     .fontWeight(.semibold)
@@ -56,7 +62,7 @@ struct CoffeeShop: View {
                             }
                             .padding(.vertical, 1)
                             
-                            Text("San Francisco")
+                            Text(coffeeCity)
                             
                         }
                         .frame(height: 150)
@@ -65,27 +71,29 @@ struct CoffeeShop: View {
                         
                         HStack{
                             Spacer()
-                            Button(action: printBullshit) {
+                            Button(action: {category = "coffee"}) {
                                 Image(systemName: "cup.and.saucer")
-                                    .foregroundColor(Color.black)
+                                    .foregroundColor(category == "coffee" ? Color.black : Color.gray)
                                     .frame(width: 100, height: 100)
                                     .cornerRadius(20)
                                     .font(.title)
-                                    .background(Color("lightgray"))
+                                    .background(category == "coffee" ? Color("lightgray") : Color.white)
                                     .cornerRadius(20)
                             }
                             
-                            Button(action: printBullshit) {
+                            Button(action: {category = "drink"}) {
                                 Image(systemName: "takeoutbag.and.cup.and.straw")
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(category == "drink" ? Color.black : Color.gray)
                                     .frame(width: 100, height: 100)
+                                    .background(category == "drink" ? Color("lightgray") : Color.white)
                                     .cornerRadius(20)
                                     .font(.title)
                             }
-                            Button(action: printBullshit) {
+                            Button(action: {category = "food"}) {
                                 Image(systemName: "fork.knife")
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(category == "food" ? Color.black : Color.gray)
                                     .frame(width: 100, height: 100)
+                                    .background(category == "food" ? Color("lightgray") : Color.white)
                                     .cornerRadius(20)
                                     .font(.title)
                             }
@@ -171,6 +179,6 @@ struct CoffeeCard: View {
 
 struct CoffeeShop_Previews: PreviewProvider {
     static var previews: some View {
-        CoffeeShop()
+        CoffeeShop(coffeeName: "Preview Coffee", coffeeRating: 5, coffeeCity: "Cachoeiro de Itapemirim", category: "coffee")
     }
 }
