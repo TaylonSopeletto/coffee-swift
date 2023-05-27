@@ -1,5 +1,12 @@
 import SwiftUI
 
+//
+//  CoffeeShop.swift
+//  coffee-swift
+//
+//  Created by Taylon L. Sopeletto on 26/05/23.
+//
+
 struct ContentView: View {
     @State private var text: String = ""
     @State var coffeeShops = [CoffeeShopInterface]()
@@ -72,7 +79,6 @@ struct ContentView: View {
                             }
                         }.navigationTitle("Coffee List")
                         
-                        
                     }
                     .padding(.horizontal, 10)
                 }
@@ -114,13 +120,11 @@ struct CoffeeShopCard: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(Color.black)
-                    .frame(width: .infinity, alignment: .leading)
                 
                 HStack{
                     Image(systemName: "star.fill")
                         .foregroundColor(Color.yellow)
                         .frame(width: 10)
-                        
                     
                     Text(String(rating))
                         .fontWeight(.semibold)

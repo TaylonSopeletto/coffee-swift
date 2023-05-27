@@ -14,7 +14,17 @@ struct CoffeeShop: View {
     let coffeeCity: String
     
     @State var coffees = [Coffee]()
-    @State var category: String
+    @State var category: String = "coffee"{
+        didSet {
+            loadData(for: category)
+        }
+    }
+    
+    func loadData(for category: String) {
+        Api().loadData(category: category) { (coffees) in
+            self.coffees = coffees
+        }
+    }
     
     func printBullshit() {
         print("print")
@@ -108,12 +118,13 @@ struct CoffeeShop: View {
                                 CoffeeCard(
                                     name: coffee.name,
                                     price: coffee.price,
-                                    description: coffee.description
+                                    description: coffee.description,
+                                    categories: coffee.categories
                                 )
                             }
                         }
                         .onAppear() {
-                            Api().loadData { (coffees) in
+                            Api().loadData(category: category) { (coffees) in
                                 self.coffees = coffees
                             }
                         }
@@ -131,6 +142,28 @@ struct CoffeeCard: View {
     let name : String
     let price: Int
     let description: String
+    let categories: [CoffeeCategory]
+    
+    func getFormatedPrice() -> String {
+        let priceInDollars = Double(price) / 100.0
+        let formattedPrice = String(format: "$ %.2f", priceInDollars)
+        
+        return formattedPrice
+    }
+    
+    
+    func getCoffeeImage() -> String {
+        switch true {
+            case categories.contains { $0.name == "food" }:
+                return "food"
+            case categories.contains { $0.name == "drink" }:
+                return "drink"
+            case categories.contains { $0.name == "coffee" }:
+                return "coffee"
+            default:
+                return "unknown"
+            }
+    }
     
     var body: some View {
         HStack{
@@ -140,8 +173,9 @@ struct CoffeeCard: View {
                 .cornerRadius(20)
                 .overlay(
                     HStack{
-                        Image("coffee")
+                        Image(getCoffeeImage())
                             .resizable()
+                            .aspectRatio(contentMode: .fill)
                             .frame(width: 90, height: 110)
                             .cornerRadius(10)
                             .padding(.leading, 20)
@@ -154,7 +188,7 @@ struct CoffeeCard: View {
                                 .font(.body)
                                 .frame(height: 50)
     
-                            Text("$ " + String(price / 100))
+                            Text(getFormatedPrice())
                                 .fontWeight(.semibold)
                         }
                         .padding(.horizontal, 20)
