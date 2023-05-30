@@ -7,24 +7,38 @@
 
 import Foundation
 
+
+
 struct Coffee: Codable, Identifiable {
-    let id = UUID()
+    var id: Int
     var name: String
     var price: Int
     var description: String
-    var categories: [CoffeeCategory]
+    var categories: [CoffeeCategory] = []
 }
 
 struct CoffeeCategory: Codable, Identifiable {
-    let id = UUID()
+    var id: Int
     var name: String
 }
 
 struct CoffeeShopInterface: Codable, Identifiable {
-    let id = UUID()
+    var id: Int
     var name: String
     var rating: Float
     var city: String
+}
+
+struct Cart: Codable {
+    var coffees: [Int]
+    var total: Int
+}
+
+struct CartDto: Codable {
+    var coffees: [Coffee]
+    var totalPrice: Int
+    var productsPrice: Int
+    var tip: Double
 }
 
 class Api : ObservableObject{
@@ -68,4 +82,27 @@ class Api : ObservableObject{
         }.resume()
         
     }
+    
+    func loadProducts(ids: [Int], completion: @escaping (CartDto) -> ()) {
+            guard var urlComponents = URLComponents(string: "http://localhost:5159/api/Coffee/sumProducts") else {
+                print("Invalid URL...")
+                return
+            }
+            
+            let queryItems = ids.map { URLQueryItem(name: "ids", value: String($0)) }
+            urlComponents.queryItems = queryItems
+            
+            guard let url = urlComponents.url else {
+                print("Invalid URL...")
+                return
+            }
+            
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                let cart = try! JSONDecoder().decode(CartDto.self, from: data!)
+                print(cart)
+                DispatchQueue.main.async {
+                    completion(cart)
+                }
+            }.resume()
+        }
 }

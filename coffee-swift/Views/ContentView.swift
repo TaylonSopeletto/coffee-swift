@@ -7,7 +7,12 @@ import SwiftUI
 //  Created by Taylon L. Sopeletto on 26/05/23.
 //
 
+class GlobalState: ObservableObject {
+    @Published var cart : Cart = Cart(coffees: [], total: 0)
+}
+
 struct ContentView: View {
+    @EnvironmentObject private var globalState: GlobalState
     @State private var text: String = ""
     @State var coffeeShops = [CoffeeShopInterface]()
     
@@ -18,15 +23,38 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
                 ScrollView {
-                    VStack(alignment: .leading){
+                    HStack{
+                        NavigationLink(destination: CartView()){
+                            Image(systemName: "cart")
+                                .frame(width: 40, height: 40)
+                                .font(.system(size: 40))
+                                .foregroundColor(Color.black)
+                                
+                                .overlay(
+                                    Circle()
+                                        .fill(Color.red)
+                                        .frame(width: 30)
+                                        .overlay(
+                                            Text(String(globalState.cart.total))
+                                                .foregroundColor(Color.white)
+                                        )
+                                        .offset(x: 20, y: -20)
+                                        
+                                )
+                        }
+                        
+                        
+                        Spacer()
+                        
                         Image("person")
                             .resizable()
                             .frame(width: 60, height: 60)
                             .aspectRatio(contentMode: .fit)
                             .cornerRadius(50)
                     }
-                    .navigationBarTitle("Home")
-                    .navigationBarHidden(true)
+                    .navigationBarTitle(Text(""), displayMode: .inline)
+                    .navigationBarBackButtonHidden(true)
+                    
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.horizontal, 25)
                     VStack {
@@ -77,7 +105,8 @@ struct ContentView: View {
                             Api().loadCoffeeShopsData { (coffeeShops) in
                                 self.coffeeShops = coffeeShops
                             }
-                        }.navigationTitle("Coffee List")
+                        }
+                            .navigationTitle("Coffee List")
                         
                     }
                     .padding(.horizontal, 10)
@@ -97,7 +126,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(GlobalState())
     }
 }
 

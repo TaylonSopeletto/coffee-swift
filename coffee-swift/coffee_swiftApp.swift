@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct coffee_swiftApp: App {
+    
+    let globalState = GlobalState()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(globalState)
         }
     }
 }
