@@ -7,40 +7,6 @@
 
 import Foundation
 
-
-
-struct Coffee: Codable, Identifiable {
-    var id: Int
-    var name: String
-    var price: Int
-    var description: String
-    var categories: [CoffeeCategory] = []
-}
-
-struct CoffeeCategory: Codable, Identifiable {
-    var id: Int
-    var name: String
-}
-
-struct CoffeeShopInterface: Codable, Identifiable {
-    var id: Int
-    var name: String
-    var rating: Float
-    var city: String
-}
-
-struct Cart: Codable {
-    var coffees: [Int]
-    var total: Int
-}
-
-struct CartDto: Codable {
-    var coffees: [Coffee]
-    var totalPrice: Int
-    var productsPrice: Int
-    var tip: Double
-}
-
 class Api : ObservableObject{
     @Published var coffees = [Coffee]()
     @Published var coffeeShops = [CoffeeShopInterface]()

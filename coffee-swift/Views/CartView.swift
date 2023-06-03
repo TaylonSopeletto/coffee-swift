@@ -44,17 +44,19 @@ struct CartView: View {
                 VStack{
                     HStack{
                         Image(systemName: "cart")
-                            .frame(width: 40, height: 40)
-                            .font(.system(size: 40))
+                            .frame(width:0, height: 40)
+                            .font(.system(size: 30))
+                            .foregroundColor(Color.black)
+                            .padding(20)
                             .overlay(
                                 Circle()
                                     .fill(Color.red)
-                                    .frame(width: 30)
+                                    .frame(width: 25)
                                     .overlay(
                                         Text(String(globalState.cart.total))
                                             .foregroundColor(Color.white)
                                     )
-                                    .offset(x: 20, y: -20)
+                                    .offset(x: 14, y: -14)
                                 
                             )
                         Spacer()
@@ -62,7 +64,7 @@ struct CartView: View {
                             .font(.title)
                             .fontWeight(.semibold)
                     }
-                    .padding(.horizontal, 30)
+                    .padding(.horizontal, 20)
                     .padding(.bottom, 100)
                     .navigationBarBackButtonHidden(true)
                     
@@ -122,62 +124,9 @@ struct CartView: View {
                     
                 }
             }
-        
-    
     }
 }
 
-struct CartCoffeeCard: View {
-        
-    let name : String
-    let price: Int
-    let categories: [CoffeeCategory]
-    
-    func getFormatedPrice() -> String {
-        let priceInDollars = Double(price) / 100.0
-        let formattedPrice = String(format: "$ %.2f", priceInDollars)
-        
-        return formattedPrice
-    }
-    
-    func getCoffeeImage() -> String {
-        switch true {
-            case categories.contains { $0.name == "food" }:
-                return "food"
-            case categories.contains { $0.name == "drink" }:
-                return "drink"
-            case categories.contains { $0.name == "coffee" }:
-                return "coffee"
-            default:
-                return "unknown"
-            }
-    }
-    
-    var body: some View {
-        HStack{
-            Image(getCoffeeImage())
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 90, height: 70)
-                .cornerRadius(10)
-                .padding(.leading, 20)
-            
-            VStack{
-                Text(name)
-                    .fontWeight(.semibold)
-                    .frame(width: 100, height: 30, alignment: .leading)
-                
-                
-                Text(getFormatedPrice())
-                    .fontWeight(.semibold)
-                    .frame(width: 100, height: 30, alignment: .leading)
-                
-            }
-            .frame(width: 100, height: 70, alignment: .topLeading)
-            
-        }
-    }
-}
 
 struct CartView_Previews: PreviewProvider {
     static var previews: some View {

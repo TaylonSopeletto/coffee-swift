@@ -53,20 +53,21 @@ struct CoffeeShop: View{
                             .padding()
                             .cornerRadius(10)
                         NavigationLink(destination: CartView()){
+                            
                             Image(systemName: "cart")
                                 .frame(width: 40, height: 40)
-                                .font(.system(size: 40))
+                                .font(.system(size: 30))
                                 .foregroundColor(Color.black)
                                 .padding(20)
                                 .overlay(
                                     Circle()
                                         .fill(Color.red)
-                                        .frame(width: 30)
+                                        .frame(width: 25)
                                         .overlay(
                                             Text(String(globalState.cart.total))
                                                 .foregroundColor(Color.white)
                                         )
-                                        .offset(x: 20, y: -20)
+                                        .offset(x: 14, y: -14)
                                         
                                 )
                         }
@@ -184,114 +185,10 @@ struct CoffeeShop: View{
                     }
                 }
             }
-        
-        
     }
 }
 
-struct CoffeeCard: View {
-    
-    @EnvironmentObject private var globalState: GlobalState
-    
-    let id: Int
-    let name : String
-    let price: Int
-    let description: String
-    let categories: [CoffeeCategory]
-    
-    func getFormatedPrice() -> String {
-        let priceInDollars = Double(price) / 100.0
-        let formattedPrice = String(format: "$ %.2f", priceInDollars)
-        
-        return formattedPrice
-    }
-    
-    func addToCart(){
-        globalState.cart.coffees.append(id)
-        globalState.cart.total = globalState.cart.coffees.count
-    }
-    
-    func removeFromCart(_ item: Int) {
-        if let index = globalState.cart.coffees.firstIndex(of: item) {
-            globalState.cart.coffees.remove(at: index)
-            globalState.cart.total = globalState.cart.coffees.count
-        }
-    }
-    
-    func getCoffeeImage() -> String {
-        switch true {
-            case categories.contains { $0.name == "food" }:
-                return "food"
-            case categories.contains { $0.name == "drink" }:
-                return "drink"
-            case categories.contains { $0.name == "coffee" }:
-                return "coffee"
-            default:
-                return "unknown"
-            }
-    }
-    
-    var body: some View {
-        HStack{
-            Rectangle()
-                .fill(Color("lightgray"))
-                .frame(width: .infinity, height: 230)
-                .cornerRadius(20)
-                .overlay(
-                    VStack(alignment: .leading){
-                        HStack(alignment: .top){
-                            Image(getCoffeeImage())
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 90, height: 100)
-                                .cornerRadius(10)
-                                .padding(.leading, 20)
-                            
-                            VStack(alignment: .leading){
-                                Text(name)
-                                    .fontWeight(.semibold)
-                                    .font(.title3)
-                                Text(description)
-                                    .font(.body)
-                                    .frame(height: 50)
-        
-                                Text(getFormatedPrice())
-                                    .fontWeight(.semibold)
-                                
-                                Button(action: {
-                                    if globalState.cart.coffees.contains(id) {
-                                        removeFromCart(id)
-                                       } else {
-                                           addToCart()
-                                       }
-                                }) {
-                                    Text(globalState.cart.coffees.contains(id) ? "Remove from cart" : "Add to cart")
-                                }
-                                    .frame(width: 160, height: 40)
-                                    .background(Color.blue)
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(20)
-                            }
-                            .padding(.horizontal, 20)
-    
-                            
-                        }
-                    }
-                )
-                .overlay(
-                    Image(systemName: "plus")
-                        .frame(width: 30, height: 30)
-                        .background(Color.black)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(50)
-                        .offset(x: 10, y: -10)
-                        
-                    ,alignment: .topTrailing
-                )
-        }
-        .padding(.horizontal, 30)
-    }
-}
+
 
 struct CoffeeShop_Previews: PreviewProvider {
     static var previews: some View {

@@ -22,14 +22,14 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView{
-                ScrollView {
+            ScrollView {
                     HStack{
                         NavigationLink(destination: CartView()){
                             Image(systemName: "cart")
-                                .frame(width: 40, height: 40)
-                                .font(.system(size: 40))
+                                .frame(width: 20, height: 20)
+                                .font(.system(size: 30))
                                 .foregroundColor(Color.black)
-                                
+                            
                                 .overlay(
                                     Circle()
                                         .fill(Color.red)
@@ -38,19 +38,19 @@ struct ContentView: View {
                                             Text(String(globalState.cart.total))
                                                 .foregroundColor(Color.white)
                                         )
-                                        .offset(x: 20, y: -20)
-                                        
+                                        .offset(x: 14, y: -14)
                                 )
                         }
                         
-                        
                         Spacer()
                         
-                        Image("person")
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(50)
+                        NavigationLink(destination: LoginView()){
+                            Image("person")
+                                .resizable()
+                                .frame(width: 60, height: 60)
+                                .aspectRatio(contentMode: .fit)
+                                .cornerRadius(50)
+                        }
                     }
                     .navigationBarTitle(Text(""), displayMode: .inline)
                     .navigationBarBackButtonHidden(true)
@@ -130,48 +130,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct CoffeeShopCard: View {
-    
-    let name : String
-    let rating : Float
-    let city : String
-    
-    var body: some View {
-        NavigationLink(destination: CoffeeShop(coffeeName: name, coffeeRating: rating, coffeeCity: city, category: "coffee")){
-            VStack(alignment: .leading){
-                Image("coffee")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 160, height: 180)
-                    .cornerRadius(20)
-                
-                Text(name)
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color.black)
-                
-                HStack{
-                    Image(systemName: "star.fill")
-                        .foregroundColor(Color.yellow)
-                        .frame(width: 10)
-                    
-                    Text(String(rating))
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color.black)
-                    Text("1200 reviews")
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color.gray)
-                    
-                }
-                .padding(.vertical, 1)
-                .padding(.horizontal, 3)
-                
-                Text("3.8 miles")
-                    .fontWeight(.semibold)
-                    .frame(alignment: .leading)
-                    .foregroundColor(Color.black)
-                
-            }
-        }
-    }
-}
