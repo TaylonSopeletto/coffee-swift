@@ -18,6 +18,7 @@
 		3168F8FC2A2ABF800075D5B9 /* CoffeeShopCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3168F8FB2A2ABF800075D5B9 /* CoffeeShopCard.swift */; };
 		3168F8FE2A2ABFB90075D5B9 /* CoffeeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3168F8FD2A2ABFB90075D5B9 /* CoffeeCard.swift */; };
 		3168F9002A2AC0B30075D5B9 /* CartCoffeeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3168F8FF2A2AC0B30075D5B9 /* CartCoffeeCard.swift */; };
+		3168F9042A2B8E6B0075D5B9 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3168F9032A2B8E6B0075D5B9 /* PaymentView.swift */; };
 		316BC8AF2A1EE00C0043132D /* coffee_swiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316BC8AE2A1EE00C0043132D /* coffee_swiftApp.swift */; };
 		316BC8B12A1EE00C0043132D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316BC8B02A1EE00C0043132D /* ContentView.swift */; };
 		316BC8B32A1EE00D0043132D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 316BC8B22A1EE00D0043132D /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		3168F8FB2A2ABF800075D5B9 /* CoffeeShopCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopCard.swift; sourceTree = "<group>"; };
 		3168F8FD2A2ABFB90075D5B9 /* CoffeeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCard.swift; sourceTree = "<group>"; };
 		3168F8FF2A2AC0B30075D5B9 /* CartCoffeeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCoffeeCard.swift; sourceTree = "<group>"; };
+		3168F9032A2B8E6B0075D5B9 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		316BC8AB2A1EE00C0043132D /* coffee-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "coffee-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		316BC8AE2A1EE00C0043132D /* coffee_swiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coffee_swiftApp.swift; sourceTree = "<group>"; };
 		316BC8B02A1EE00C0043132D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				316BC8DB2A20C79E0043132D /* CoffeeShop.swift */,
 				31DB39E52A22D86C00FA212D /* LoginView.swift */,
 				3133DE982A25659D00CD639F /* CartView.swift */,
+				3168F9032A2B8E6B0075D5B9 /* PaymentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				3168F8F92A2ABE740075D5B9 /* Images.swift in Sources */,
 				316BC8DA2A2052B20043132D /* Coffees.swift in Sources */,
 				3168F8F72A2ABDEE0075D5B9 /* Price.swift in Sources */,
+				3168F9042A2B8E6B0075D5B9 /* PaymentView.swift in Sources */,
 				31DB39E62A22D86C00FA212D /* LoginView.swift in Sources */,
 				3168F8EF2A2ABC4A0075D5B9 /* CoffeeCategory.swift in Sources */,
 				3168F9002A2AC0B30075D5B9 /* CartCoffeeCard.swift in Sources */,

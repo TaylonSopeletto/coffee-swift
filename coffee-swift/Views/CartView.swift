@@ -85,7 +85,7 @@ struct CartView: View {
                             )
                         }
                     }
-                   
+                    
                     
                     Text("Coffees:")
                         .frame(width: 170, height: 20)
@@ -113,14 +113,14 @@ struct CartView: View {
                     
                     
                     
-                    Button(action: {}) {
-                        Text("Proceed to payment")
-                    }
-                    .frame(width: 180, height: 40)
-                    .background(Color.blue)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(20)
-                    .padding(.top, 40)
+                    NavigationLink(destination: PaymentView()) {
+                           Text("Proceed to payment")
+                               .frame(width: 180, height: 40)
+                               .background(Color.blue)
+                               .foregroundColor(Color.white)
+                               .cornerRadius(20)
+                               .padding(.top, 40)
+                       }
                     
                 }
             }

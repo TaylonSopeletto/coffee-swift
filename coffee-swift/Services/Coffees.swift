@@ -13,16 +13,34 @@ class Api : ObservableObject{
     
     func loadCoffeeShopsData(completion:@escaping ([CoffeeShopInterface]) -> ()) {
         guard let url = URL(string: "http://localhost:5159/api/CoffeeShop") else {
-            print("Invalid url...")
-            return
-        }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            let coffeeShops = try! JSONDecoder().decode([CoffeeShopInterface].self, from: data!)
-            print(coffeeShops)
-            DispatchQueue.main.async {
-                completion(coffeeShops)
-            }
-        }.resume()
+               print("Invalid URL...")
+               return
+           }
+           
+           URLSession.shared.dataTask(with: url) { data, response, error in
+               if let error = error {
+                   print("Error: \(error)")
+                   // Handle the error condition appropriately (e.g., show an alert)
+                   return
+               }
+               
+               guard let data = data else {
+                   print("No data received")
+                   // Handle the no data condition appropriately (e.g., show an alert)
+                   return
+               }
+               
+               do {
+                   let coffeeShops = try JSONDecoder().decode([CoffeeShopInterface].self, from: data)
+                   print(coffeeShops)
+                   DispatchQueue.main.async {
+                       completion(coffeeShops)
+                   }
+               } catch {
+                   print("Error decoding data: \(error)")
+                   // Handle the decoding error condition appropriately (e.g., show an alert)
+               }
+           }.resume()
         
     }
     
